@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -52,6 +53,9 @@ namespace Bfh.Wba.AspNetCore.Web
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
+
+			string baseDir = env.ContentRootPath;
+			AppDomain.CurrentDomain.SetData("App_Data", Path.Combine(baseDir, "App_Data"));
 		}
 	}
 }
