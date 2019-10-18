@@ -1,0 +1,17 @@
+﻿@model Bfh.Wba.AspNetCore.Web.ViewModels.DepartmentIndexViewModel
+@{
+    ViewData["Title"] = "Departments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Departments</h1>
+
+<select>
+	@foreach (var department in Model.Departments)
+	{
+		<department-option department="@department" preselected-department-id="@Model.PreselectedDepartmentId"></department-option>
+	}
+</select>
+
+<department-selector departments="@Model.Departments" preselected-department-id="@Model.PreselectedDepartmentId"></department-selector>
+

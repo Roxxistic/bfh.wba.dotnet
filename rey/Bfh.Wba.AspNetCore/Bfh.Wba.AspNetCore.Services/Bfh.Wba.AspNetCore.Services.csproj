@@ -8,4 +8,8 @@
     <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Departments\" />
+  </ItemGroup>
+
 </Project>
