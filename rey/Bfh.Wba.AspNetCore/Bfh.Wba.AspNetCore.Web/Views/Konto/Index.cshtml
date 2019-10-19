@@ -1,0 +1,13 @@
+﻿@using Bfh.Wba.AspNetCore.Web.ViewModels
+@model Bfh.Wba.AspNetCore.Web.ViewModels.KontoIndexViewModel
+@{
+    ViewData["Title"] = "Konto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul>
+	<li><a href="Konto/@nameof(KontoGruppeTyp.Funktionen)/">@nameof(KontoGruppeTyp.Funktionen)</a></li>
+	<li><a href="Konto/@nameof(KontoGruppeTyp.SachgruppenBilanz)/">@nameof(KontoGruppeTyp.SachgruppenBilanz)</a></li>
+	<li><a href="Konto/@nameof(KontoGruppeTyp.SachgruppenEr)/">@nameof(KontoGruppeTyp.SachgruppenEr)</a></li>
+	<li><a href="Konto/@nameof(KontoGruppeTyp.SachgruppenIr)/">@nameof(KontoGruppeTyp.SachgruppenIr)</a></li>
+</ul>

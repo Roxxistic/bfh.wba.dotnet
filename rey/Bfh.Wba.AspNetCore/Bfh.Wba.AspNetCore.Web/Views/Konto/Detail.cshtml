@@ -1,0 +1,19 @@
+﻿@using Bfh.Wba.AspNetCore.Web.ViewModels
+@{
+    ViewData["Title"] = ViewBag.Top.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Top.Id @ViewBag.Top.Name</h1>
+<p>@ViewBag.Top.Beschreibung</p>
+
+@if (ViewBag.List != null)
+{
+	<ul class="list-group list-group-flush">
+		@foreach (var kg in ViewBag.List)
+		{
+			var vm = new Tuple<KontoGruppe, string, string>(kg, ViewBag.KontoGruppeTyp, ViewBag.SelectedKontoGruppeId);
+			<partial name="_KontoGruppe" model="vm"/>
+		}
+	</ul>
+}

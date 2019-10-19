@@ -1,0 +1,16 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	KontoGruppenListe list = ViewBag["List"];
+}
+
+@if (list != null && list.Any())
+{
+	<h2>@ViewBag["Name"]</h2>
+	<ul>
+		@foreach (var kg in list)
+		{
+			<partial name="_KontoGruppe" model="@kg" />
+		}
+	</ul>
+}
