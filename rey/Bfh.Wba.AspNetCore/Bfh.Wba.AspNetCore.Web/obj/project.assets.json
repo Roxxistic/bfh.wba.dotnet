@@ -165,21 +165,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\roxxi\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\roxxi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEV\\github.bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\Bfh.Wba.AspNetCore.Web.csproj",
+      "projectUniqueName": "C:\\DEV\\bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\Bfh.Wba.AspNetCore.Web.csproj",
       "projectName": "Bfh.Wba.AspNetCore.Web",
-      "projectPath": "C:\\DEV\\github.bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\Bfh.Wba.AspNetCore.Web.csproj",
+      "projectPath": "C:\\DEV\\bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\Bfh.Wba.AspNetCore.Web.csproj",
       "packagesPath": "C:\\Users\\roxxi\\.nuget\\packages\\",
-      "outputPath": "C:\\DEV\\github.bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\obj\\",
+      "outputPath": "C:\\DEV\\bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\roxxi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -194,8 +190,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\DEV\\github.bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Services\\Bfh.Wba.AspNetCore.Services.csproj": {
-              "projectPath": "C:\\DEV\\github.bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Services\\Bfh.Wba.AspNetCore.Services.csproj"
+            "C:\\DEV\\bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Services\\Bfh.Wba.AspNetCore.Services.csproj": {
+              "projectPath": "C:\\DEV\\bfh.wba.dotnet\\rey\\Bfh.Wba.AspNetCore\\Bfh.Wba.AspNetCore.Services\\Bfh.Wba.AspNetCore.Services.csproj"
             }
           }
         }

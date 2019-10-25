@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bfh.Wba.AspNetCore.Web.Models;
+﻿using Bfh.Wba.AspNetCore.Web.Models;
+using ModelsExamples.Models;
 
 namespace Bfh.Wba.AspNetCore.Web.ViewModels
 {

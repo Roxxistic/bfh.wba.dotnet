@@ -1,80 +1,125 @@
-﻿using Bfh.Wba.AspNetCore.Web.FakeData;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Bfh.Wba.AspNetCore.Web.Models;
-using Bfh.Wba.AspNetCore.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using ModelsExamples.Models;
+
 
 namespace Bfh.Wba.AspNetCore.Web.Controllers
 {
-	public class KontoController : Controller
-	{
-		public IActionResult Index(KontoGruppeTyp? typ)
-		{
-			if (typ == null)
-			{
-				var list = new KontoGruppenListe();
-				return View();
-			}
-			var vm = new KontoIndexViewModel(KontoData.Funktionen, KontoData.SachgruppenBilanz, KontoData.SachgruppenER, KontoData.SachgruppenIR);
-			return View(vm);
-		}
+    public class KontoController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-		[Route("Konto/{type}/{id?}")]
-		public IActionResult Detail(KontoGruppeTyp type, string? id, string? selectedId)
-		{
-			var vm = new KontoGruppeTreeItem(GetKontoGruppe(type, id), selectedId, GetKey(type));
+        public IActionResult Funktionen(string id)
+        {
+            return Tree("Funktionen", 
+                Data.Funktionen, id);
+        }
 
-			return View(vm);
-		}
+        public IActionResult SGBilanz(string id)
+        {
+            return Tree("Sachgruppen Bilanz", 
+                Data.SachgruppenBilanz, id);
+        }
 
-		private KontoGruppe GetKontoGruppe(KontoGruppeTyp type, string? id)
-		{
-			if (string.IsNullOrEmpty(id))
-			{
-				var kg = new KontoGruppe()
-				{
-					Name = GetName(type)
-				};
-				kg.Untergruppen.AddRange(KontoData.Funktionen);
-				return kg;
-			}
-			else
-			{
-				return KontoData.Funktionen.Find(id);
-			}
-		}
+        public IActionResult SGER(string id)
+        {
+            return Tree("Sachgruppen Erfolgsrechnung", 
+                Data.SachgruppenER, id);
+        }
 
-		private string GetName(KontoGruppeTyp type)
-		{
-			switch (type)
-			{
-				case KontoGruppeTyp.Funktionen:
-					return "Funktionen";
-				case KontoGruppeTyp.SachgruppenBilanz:
-					return "Sachgruppen Bilanz";
-				case KontoGruppeTyp.SachgruppenEr:
-					return "Sachgruppen ER";
-				case KontoGruppeTyp.SachgruppenIr:
-					return "Sachgruppen IR";
-				default:
-					return "Funktionen";
-			}
-		}
+        public IActionResult SGIR(string id)
+        {
+            return Tree("Sachgruppen Investitionsrechnung", 
+                Data.SachgruppenIR, id);
+        }
 
-		private string GetKey(KontoGruppeTyp type)
-		{
-			switch (type)
-			{
-				case KontoGruppeTyp.Funktionen:
-					return nameof(KontoGruppeTyp.Funktionen);
-				case KontoGruppeTyp.SachgruppenBilanz:
-					return nameof(KontoGruppeTyp.SachgruppenBilanz);
-				case KontoGruppeTyp.SachgruppenEr:
-					return nameof(KontoGruppeTyp.SachgruppenEr);
-				case KontoGruppeTyp.SachgruppenIr:
-					return nameof(KontoGruppeTyp.SachgruppenIr);
-				default:
-					return nameof(KontoGruppeTyp.Funktionen);
-			}
-		}
-	}
+        public IActionResult ER(string funktion, string sachgruppe)
+        {
+            ViewData["Type"] = "ER";
+
+            return View("ER_IR", new ER_IR_ViewModel
+            {
+                Title = "Erfolgsrechnung",
+                Funktionen = Data.Funktionen,
+                Sachgruppen = Data.SachgruppenER,
+                Konten = Data.ER,
+                Konto = new Konto
+                {
+                    Funktion = Data.Funktionen.Find(funktion), 
+                    Sachgruppe = Data.SachgruppenER.Find(sachgruppe)
+                }
+            });
+        }
+
+        public IActionResult IR(string funktion, string sachgruppe)
+        {
+            ViewData["Type"] = "IR";
+
+            return View("ER_IR", new ER_IR_ViewModel
+            {
+                Title = "Investitionsrechnung",
+                Funktionen = Data.Funktionen,
+                Sachgruppen = Data.SachgruppenIR,
+                Konten = Data.IR,
+                Konto = new Konto
+                {
+                    Funktion = Data.Funktionen.Find(funktion),
+                    Sachgruppe = Data.SachgruppenIR.Find(sachgruppe)
+                }
+            });
+        }
+
+        public IActionResult Create(string funktion, string sachgruppe, string type)
+        {
+            ViewData["Type"] = type;
+
+            return View(new Konto 
+            {
+                Nummer = 0,
+                Name = "",
+                Funktion = Data.Funktionen.Find(funktion),
+                Sachgruppe = ((type == "ER") ? Data.SachgruppenER : Data.SachgruppenIR).Find(sachgruppe)
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Create(Konto konto, string funktion, string sachgruppe, string type)
+        {
+            ViewData["Type"] = type;
+
+            konto.Funktion = Data.Funktionen.Find(funktion);
+            konto.Sachgruppe = ((type == "ER") ? Data.SachgruppenER : Data.SachgruppenIR).Find(sachgruppe);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var list = ((type == "ER") ? Data.ER : Data.IR);
+                    list.Add(konto.Kontonummer, konto);
+
+                    return RedirectToAction(type);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(String.Empty, ex.Message);
+                }
+            }
+
+            return View(konto);
+        }
+
+        protected IActionResult Tree(string title, KontoGruppenListe list, string id)
+        {
+            ViewData["Id"] = id;
+            ViewData["Title"] = title;
+            return View("Tree", list);
+        }
+    }
 }
