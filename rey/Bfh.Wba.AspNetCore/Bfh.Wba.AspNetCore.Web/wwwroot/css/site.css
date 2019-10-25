@@ -69,3 +69,51 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* ------------------------------------------------------------ */
+
+a.tree-level-0,
+a.tree-level-1,
+a.tree-level-2,
+a.tree-level-3,
+a.tree-level-4,
+a.tree-level-5,
+a.tree-level-6 {
+    display: block;
+    padding: 3px 6px;
+    color: rgba(21, 104, 126, 1);
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+a.tree-level-0 {
+    background-color: rgba(21, 104, 126, 1);
+    color: white;
+    font-weight: bold;
+    margin-left: 0px;
+}
+a.tree-level-1 {
+    background-color: rgba(21, 104, 126, 0.15);
+    margin-left: 30px;
+}
+a.tree-level-2 {
+    background-color: rgba(21, 104, 126, 0.12);
+    margin-left: 60px;
+}
+a.tree-level-3 {
+    background-color: rgba(21, 104, 126, 0.09);
+    margin-left: 90px;
+}
+a.tree-level-4 {
+    background-color: rgba(21, 104, 126, 0.06);
+    margin-left: 120px;
+}
+a.tree-level-5 {
+    background-color: rgba(21, 104, 126, 0.03);
+    margin-left: 150px;
+}
+
+a.selected {
+    background-color: rgba(236, 121, 16, 0.3);
+    border: 1px solid rgba(236, 121, 16, 1);
+    color: rgba(21, 104, 126, 1);
+}

@@ -1,5 +1,4 @@
 ﻿using Bfh.Wba.AspNetCore.Web.Models;
-using ModelsExamples.Models;
 
 namespace Bfh.Wba.AspNetCore.Web.ViewModels
 {

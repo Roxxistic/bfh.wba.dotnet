@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ModelsExamples.Models;
 
 namespace Bfh.Wba.AspNetCore.Web.Models
 {

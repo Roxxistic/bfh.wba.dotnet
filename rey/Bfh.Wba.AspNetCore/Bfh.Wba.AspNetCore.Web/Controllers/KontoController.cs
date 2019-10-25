@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Bfh.Wba.AspNetCore.Web.FakeData;
 using Bfh.Wba.AspNetCore.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using ModelsExamples.Models;
 
 
 namespace Bfh.Wba.AspNetCore.Web.Controllers
 {
-    public class KontoController : Controller
+	public class KontoController : Controller
     {
         public IActionResult Index()
         {
@@ -19,25 +16,25 @@ namespace Bfh.Wba.AspNetCore.Web.Controllers
         public IActionResult Funktionen(string id)
         {
             return Tree("Funktionen", 
-                Data.Funktionen, id);
+                FakeAccountingData.Funktionen, id);
         }
 
         public IActionResult SGBilanz(string id)
         {
             return Tree("Sachgruppen Bilanz", 
-                Data.SachgruppenBilanz, id);
+                FakeAccountingData.SachgruppenBilanz, id);
         }
 
         public IActionResult SGER(string id)
         {
             return Tree("Sachgruppen Erfolgsrechnung", 
-                Data.SachgruppenER, id);
+                FakeAccountingData.SachgruppenER, id);
         }
 
         public IActionResult SGIR(string id)
         {
             return Tree("Sachgruppen Investitionsrechnung", 
-                Data.SachgruppenIR, id);
+                FakeAccountingData.SachgruppenIR, id);
         }
 
         public IActionResult ER(string funktion, string sachgruppe)
@@ -47,13 +44,13 @@ namespace Bfh.Wba.AspNetCore.Web.Controllers
             return View("ER_IR", new ER_IR_ViewModel
             {
                 Title = "Erfolgsrechnung",
-                Funktionen = Data.Funktionen,
-                Sachgruppen = Data.SachgruppenER,
-                Konten = Data.ER,
+                Funktionen = FakeAccountingData.Funktionen,
+                Sachgruppen = FakeAccountingData.SachgruppenER,
+                Konten = FakeAccountingData.ER,
                 Konto = new Konto
                 {
-                    Funktion = Data.Funktionen.Find(funktion), 
-                    Sachgruppe = Data.SachgruppenER.Find(sachgruppe)
+                    Funktion = FakeAccountingData.Funktionen.Find(funktion), 
+                    Sachgruppe = FakeAccountingData.SachgruppenER.Find(sachgruppe)
                 }
             });
         }
@@ -65,13 +62,13 @@ namespace Bfh.Wba.AspNetCore.Web.Controllers
             return View("ER_IR", new ER_IR_ViewModel
             {
                 Title = "Investitionsrechnung",
-                Funktionen = Data.Funktionen,
-                Sachgruppen = Data.SachgruppenIR,
-                Konten = Data.IR,
+                Funktionen = FakeAccountingData.Funktionen,
+                Sachgruppen = FakeAccountingData.SachgruppenIR,
+                Konten = FakeAccountingData.IR,
                 Konto = new Konto
                 {
-                    Funktion = Data.Funktionen.Find(funktion),
-                    Sachgruppe = Data.SachgruppenIR.Find(sachgruppe)
+                    Funktion = FakeAccountingData.Funktionen.Find(funktion),
+                    Sachgruppe = FakeAccountingData.SachgruppenIR.Find(sachgruppe)
                 }
             });
         }
@@ -84,8 +81,8 @@ namespace Bfh.Wba.AspNetCore.Web.Controllers
             {
                 Nummer = 0,
                 Name = "",
-                Funktion = Data.Funktionen.Find(funktion),
-                Sachgruppe = ((type == "ER") ? Data.SachgruppenER : Data.SachgruppenIR).Find(sachgruppe)
+                Funktion = FakeAccountingData.Funktionen.Find(funktion),
+                Sachgruppe = ((type == "ER") ? FakeAccountingData.SachgruppenER : FakeAccountingData.SachgruppenIR).Find(sachgruppe)
             });
         }
 
@@ -94,14 +91,14 @@ namespace Bfh.Wba.AspNetCore.Web.Controllers
         {
             ViewData["Type"] = type;
 
-            konto.Funktion = Data.Funktionen.Find(funktion);
-            konto.Sachgruppe = ((type == "ER") ? Data.SachgruppenER : Data.SachgruppenIR).Find(sachgruppe);
+            konto.Funktion = FakeAccountingData.Funktionen.Find(funktion);
+            konto.Sachgruppe = ((type == "ER") ? FakeAccountingData.SachgruppenER : FakeAccountingData.SachgruppenIR).Find(sachgruppe);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var list = ((type == "ER") ? Data.ER : Data.IR);
+                    var list = ((type == "ER") ? FakeAccountingData.ER : FakeAccountingData.IR);
                     list.Add(konto.Kontonummer, konto);
 
                     return RedirectToAction(type);

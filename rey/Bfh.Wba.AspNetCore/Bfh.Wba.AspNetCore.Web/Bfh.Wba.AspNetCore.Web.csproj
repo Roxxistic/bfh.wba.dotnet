@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Konto\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ModelsExamples.Models;
 
 namespace Bfh.Wba.AspNetCore.Web.Models
 {
