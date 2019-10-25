@@ -19,7 +19,7 @@ namespace Bfh.Wba.AspNetCore.Web.ViewModels
 		}
 	}
 
-	public enum KontoGruppeTyp
+	public enum AccountGroupCategory
 	{
 		Funktionen,
 		SachgruppenBilanz,

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Bfh.Wba.AspNetCore.Web.ViewModels
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unicorns are real!</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +20,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" asp-area="" asp-controller="" asp-action="" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+							<a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" asp-area="" asp-controller="" asp-action="" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
 	                        <div class="dropdown-menu">
 		                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 		                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -29,14 +30,16 @@
 							<a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
 	                    </li>
 	                    <li class="nav-item dropdown">
-		                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" asp-area="" asp-controller="" asp-action="" role="button" aria-haspopup="true" aria-expanded="false">Accounting</a>
+		                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" asp-area="" asp-controller="" asp-action="" role="button" aria-haspopup="true" aria-expanded="false">Accounting</a>
 		                    <div class="dropdown-menu">
-			                    <a class="dropdown-item" asp-area="" asp-controller="Konto" asp-action="Funktionen">Kontogruppen Funktion</a>
-			                    <a class="dropdown-item" asp-area="" asp-controller="Konto" asp-action="SGBilanz">Kontogruppen Sache</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="Group" asp-route-type="@AccountGroupCategory.Funktionen">Kontogruppen Funktion</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="Group" asp-route-type="@AccountGroupCategory.SachgruppenBilanz">Sachgruppe Bilanz</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="Group" asp-route-type="@AccountGroupCategory.SachgruppenEr">Sachgruppe Erfolgsrechnung</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="Group" asp-route-type="@AccountGroupCategory.SachgruppenIr">Sachgruppe Investitionsrechnung</a>
 			                    <div class="dropdown-divider"></div>
-			                    <a class="dropdown-item" asp-area="" asp-controller="Konto" asp-action="SGBilanz">Bilanz</a>
-			                    <a class="dropdown-item" asp-area="" asp-controller="Konto" asp-action="ER">Erfolgsrechnung</a>
-			                    <a class="dropdown-item" asp-area="" asp-controller="Konto" asp-action="IR">Investitionsrechnung</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="SGBilanz">Bilanz</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="ER">Erfolgsrechnung</a>
+			                    <a class="dropdown-item" asp-area="" asp-controller="Accounting" asp-action="IR">Investitionsrechnung</a>
 		                    </div>
 	                    </li>
                     </ul>
@@ -44,7 +47,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

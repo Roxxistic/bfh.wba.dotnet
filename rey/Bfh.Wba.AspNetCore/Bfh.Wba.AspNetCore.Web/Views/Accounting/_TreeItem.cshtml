@@ -1,6 +1,6 @@
 ﻿@model KontoGruppe
 
-<a asp-route-id="@Model.Id" class='tree-level-@Model.Level @(Model.Id.Equals(ViewData["Id"]) ? "selected" : "")'>
+<a asp-route-selectedGroupId="@Model.Id" class='tree-level-@Model.Level @(Model.Id.Equals(ViewData["Id"]) ? "selected" : "")'>
     <b>@Model.Id</b>
     &nbsp; &nbsp;
     @Model.Name

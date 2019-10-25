@@ -1,43 +1,33 @@
 ﻿using System;
 using Bfh.Wba.AspNetCore.Web.FakeData;
 using Bfh.Wba.AspNetCore.Web.Models;
+using Bfh.Wba.AspNetCore.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Bfh.Wba.AspNetCore.Web.Controllers
 {
-	public class KontoController : Controller
+	public class AccountingController : Controller
     {
-        public IActionResult Index()
+	    public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Funktionen(string id)
-        {
-            return Tree("Funktionen", 
-                FakeAccountingData.Funktionen, id);
-        }
+		[Route("{controller}/{action}/{type}")]
+		public IActionResult Group(AccountGroupCategory type, string selectedGroupId)
+		{
+			return type switch
+			{
+				AccountGroupCategory.SachgruppenBilanz => Tree("Sachgruppen Bilanz", FakeAccountingData.SachgruppenBilanz, selectedGroupId),
+				AccountGroupCategory.SachgruppenEr => Tree("Sachgruppen Erfolgsrechnung", FakeAccountingData.SachgruppenER, selectedGroupId),
+				AccountGroupCategory.SachgruppenIr => Tree("Sachgruppen Investitionsrechnung", FakeAccountingData.SachgruppenIR, selectedGroupId),
+				AccountGroupCategory.Funktionen => Tree("Funktionen", FakeAccountingData.Funktionen, selectedGroupId),
+				_ => RedirectToAction("Index")
+			};
+		}
 
-        public IActionResult SGBilanz(string id)
-        {
-            return Tree("Sachgruppen Bilanz", 
-                FakeAccountingData.SachgruppenBilanz, id);
-        }
-
-        public IActionResult SGER(string id)
-        {
-            return Tree("Sachgruppen Erfolgsrechnung", 
-                FakeAccountingData.SachgruppenER, id);
-        }
-
-        public IActionResult SGIR(string id)
-        {
-            return Tree("Sachgruppen Investitionsrechnung", 
-                FakeAccountingData.SachgruppenIR, id);
-        }
-
-        public IActionResult ER(string funktion, string sachgruppe)
+		public IActionResult ER(string funktion, string sachgruppe)
         {
             ViewData["Type"] = "ER";
 
